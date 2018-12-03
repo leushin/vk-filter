@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{htmlWebpackPlugin.options.title}}</title>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700&amp;subset=cyrillic" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="heading">Выберите друзей</div>
+        <div class="search">
+            <input type="text" class="search-full" placeholder="Начните вводить имя друга">
+            <input type="text" class="search-list" placeholder="Название">
+        </div>
+        <div class="friends">
+            <div class="all">
+                <div class="title">Ваши друзья</div>
+                <ul class="list"></ul>
+            </div>
+            <div class="fav">
+                <div class="title">Друзья в списке</div>
+                <ul class="list"></ul>
+            </div>
+        </div>
+        <div class="actions">
+            <button class="save">Сохранить</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
+    <script src="https://vk.com/js/api/openapi.js?159" type="text/javascript"></script>
+</body>
+
+</html>
