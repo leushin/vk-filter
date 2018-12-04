@@ -69,8 +69,6 @@ body {
 .friends > div {
     width: 50%;
     margin: 16px;
-    height: 300px;
-    overflow-y: scroll;
 }
 
 .title {
@@ -79,15 +77,23 @@ body {
     font-weight: 500;
     color: #4f4f4f;
     border-bottom: 1px solid #f0f0f0;
+    padding: 8px 0;
 }
 
-.list li {
+.list {
+    height: 300px;
+    overflow-y: scroll;
+    user-select: none;
+}
+
+.list .friend {
+    position: relative;
     display: flex;
     align-items: center;
     padding: 8px;
 }
 
-.list li:hover {
+.list .friend:hover {
     background: #f0f0f0;
 }
 
@@ -100,6 +106,19 @@ body {
     font-size: 12px;
     line-height: 16px;
     font-weight: 500;
+}
+
+.list .add {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    margin-top: -8px;
+    display: block;
+    cursor: pointer;
+}
+
+.fav .list .add {
+    transform: rotate(45deg);
 }
 
 .actions {
