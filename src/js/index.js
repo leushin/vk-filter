@@ -28,7 +28,7 @@ const vkAPI = (method, params) => {
             }
         });
     });
-}
+};
 
 const renderList = (items, container) => {
     let template = `
@@ -42,34 +42,38 @@ const renderList = (items, container) => {
     let render = Handlebars.compile(template);
 
     container.innerHTML = render(items);
-}
+};
+
+let currentDrag;
+
+const handleDragStart = (e, zone) => {
+    e.dataTransfer.setData('text/html', 'dragstart'); // for firefox
+    currentDrag = { source: zone, node: e.target.closest('.friend') };
+};
+
+const handleDragOver = (e) => {
+    e.preventDefault();
+};
+
+const handleDrop = (e, zone) => {
+    if (currentDrag) {
+        e.preventDefault();
+
+        if (currentDrag.source !== zone) {
+            zone.appendChild(currentDrag.node);
+        }
+
+        currentDrag = null;
+    }
+};
 
 const makeDnD = (zones) => {
-    let currentDrag;
-
     zones.forEach(zone => {
-        zone.addEventListener('dragstart', (e) => {
-            e.dataTransfer.setData('text/html', 'dragstart'); // for firefox
-            currentDrag = { source: zone, node: e.target.closest('.friend') };
-        });
-
-        zone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-        });
-        
-        zone.addEventListener('drop', (e) => {
-            if (currentDrag) {
-                e.preventDefault();
-
-                if (currentDrag.source !== zone) {
-                    zone.appendChild(currentDrag.node);
-                }
-
-                currentDrag = null;
-            }
-        }); 
+        zone.addEventListener('dragstart', (e) => handleDragStart(e, zone));
+        zone.addEventListener('dragover', handleDragOver);
+        zone.addEventListener('drop', (e) => handleDrop(e, zone));
     });
-}
+};
 
 auth().then(async () => {
     try {
